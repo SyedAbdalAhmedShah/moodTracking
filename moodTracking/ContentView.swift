@@ -11,7 +11,8 @@ struct ContentView: View {
     
     @State var feeling = "? "
     @State var FColor: Color = .white
-    
+    @State var scrollToBottom = false
+    @State var selectedMode: ImageResource = .none
     
     var body: some View {
       
@@ -22,7 +23,7 @@ struct ContentView: View {
             Circle().foregroundStyle(FColor).frame(width: 300,height: 300).blur(radius: 200).offset(x: 130,y: 130)
             ScrollView {
                 topTitle
-                IconView()
+                IconView(FColor: $FColor, selectedMode: $selectedMode)
             }
          
         }
@@ -35,7 +36,7 @@ struct ContentView: View {
             
             HStack(content: {
                 Text("Today")
-                Text(feeling).contentTransition(.numericText())
+                Text(feeling).foregroundStyle(FColor).contentTransition(.numericText())
             })
             
         }).foregroundStyle(.white).font(.largeTitle.bold()).frame(maxWidth:  .infinity, alignment: .leading)
@@ -48,6 +49,10 @@ struct ContentView: View {
 
 
  struct IconView: View {
+     @Binding var FColor: Color
+     @State var scale = false
+     @Binding var selectedMode: ImageResource
+     @State var faceScale :CGFloat = 1
     var body: some View {
         /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
     }
