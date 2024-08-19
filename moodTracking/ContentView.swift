@@ -10,7 +10,14 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
       
-        .padding()
+        ZStack (alignment: .bottomTrailing
+                ){
+            Color.black.ignoresSafeArea()
+            
+            Circle().foregroundStyle(.white).frame(width: 300,height: 300).blur(radius: 200)
+            
+            
+        }
     }
 }
 
