@@ -14,10 +14,20 @@ struct ContentView: View {
                 ){
             Color.black.ignoresSafeArea()
             
-            Circle().foregroundStyle(.white).frame(width: 300,height: 300).blur(radius: 200)
-            
-            
+            Circle().foregroundStyle(.white).frame(width: 300,height: 300).blur(radius: 200).offset(x: 130,y: 130)
+            ScrollView {
+                topTitle
+            }
+         
         }
+    }
+    
+    
+    var topTitle:some View {
+        VStack(content: {
+            Text("How Do You Feel").foregroundStyle(.white)
+            
+        })
     }
 }
 
