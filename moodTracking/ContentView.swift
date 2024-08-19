@@ -24,6 +24,7 @@ struct ContentView: View {
             ScrollView {
                 topTitle
                 IconView(FColor: $FColor, selectedMode: $selectedMode)
+               
             }
          
         }
@@ -54,7 +55,17 @@ struct ContentView: View {
      @Binding var selectedMode: ImageResource
      @State var faceScale :CGFloat = 1
     var body: some View {
-        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+        
+        ZStack(content: {
+            Circle().frame(width: 220, height: 220).foregroundStyle(FColor).opacity(scale ? 0 : 1).scaleEffect(scale ? 1 : 0.4)
+            Circle().frame(width: 300, height: 300).foregroundStyle(FColor).opacity(scale ? 0 : 1).scaleEffect(scale ? 1 : 0.2)
+            Image(selectedMode).resizable().scaledToFit().frame(width: 150, height: 150).scaleEffect(faceScale)
+        }).onAppear() {
+            withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
+                scale.toggle()
+            }
+        }
+      
     }
 }
 
