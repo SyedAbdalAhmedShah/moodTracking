@@ -10,15 +10,19 @@ import SwiftUI
 struct ContentView: View {
     
     @State var feeling = "? "
+    @State var FColor: Color = .white
+    
+    
     var body: some View {
       
         ZStack (alignment: .bottomTrailing
                 ){
             Color.black.ignoresSafeArea()
             
-            Circle().foregroundStyle(.white).frame(width: 300,height: 300).blur(radius: 200).offset(x: 130,y: 130)
+            Circle().foregroundStyle(FColor).frame(width: 300,height: 300).blur(radius: 200).offset(x: 130,y: 130)
             ScrollView {
                 topTitle
+                IconView()
             }
          
         }
@@ -26,7 +30,7 @@ struct ContentView: View {
     
     
     var topTitle:some View {
-        VStack (alignment:.leading, content: {
+        VStack (alignment:.leading,spacing: 10, content: {
             Text("How Do You Feel")
             
             HStack(content: {
@@ -41,3 +45,11 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+
+ struct IconView: View {
+    var body: some View {
+        /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Hello, world!@*/Text("Hello, world!")/*@END_MENU_TOKEN@*/
+    }
+}
+
