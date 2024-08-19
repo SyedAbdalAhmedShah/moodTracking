@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var feeling = "? "
     var body: some View {
       
         ZStack (alignment: .bottomTrailing
@@ -24,10 +26,15 @@ struct ContentView: View {
     
     
     var topTitle:some View {
-        VStack(content: {
-            Text("How Do You Feel").foregroundStyle(.white)
+        VStack (alignment:.leading, content: {
+            Text("How Do You Feel")
             
-        })
+            HStack(content: {
+                Text("Today")
+                Text(feeling).contentTransition(.numericText())
+            })
+            
+        }).foregroundStyle(.white).font(.largeTitle.bold()).frame(maxWidth:  .infinity, alignment: .leading)
     }
 }
 
