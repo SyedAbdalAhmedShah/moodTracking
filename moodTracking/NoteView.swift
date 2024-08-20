@@ -16,7 +16,8 @@ struct NoteView: View {
             Text("Note Mood").font(.title2.bold()).foregroundStyle(.white).padding().frame(maxWidth: .infinity, alignment: open ? .center : .topLeading)
             
             if open {
-                TextEditor(text: $text).padding(10).scrollContentBackground(.hidden).frame(height: 100,al).background(.gray.opacity(0.3),in: .rect(cornerRadius: 8))
+                TextEditor(text: $text).padding(10).scrollContentBackground(.hidden).frame(height: 100).background(.gray.opacity(0.3),in: .rect(cornerRadius: 8)).padding(.leading).padding(.trailing)
+                
             }
         }).overlay(alignment: .topTrailing) {
             Button(action: {
