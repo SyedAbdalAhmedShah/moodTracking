@@ -19,6 +19,9 @@ struct ContentView: View {
         MoodModel(feelings: "Confuse", Image:.confuse, color: .blue),
         MoodModel(feelings: "Angry", Image:.angry, color: .red),
     ]
+    
+    
+
     var body: some View {
       
         ZStack (alignment: .bottomTrailing
@@ -29,7 +32,8 @@ struct ContentView: View {
             ScrollView {
                 topTitle
                 IconView(FColor: $FColor, selectedMode: $selectedMode)
-                HStack(spacing: 20, content: {
+           
+                HStack(spacing: 15, content: {
                     ForEach(moods, id: \.feelings) {mood in
                         VStack(content: {
                             Image(mood.Image).resizable().scaledToFill().frame(
@@ -37,14 +41,16 @@ struct ContentView: View {
                             )
                             Text(mood.feelings).foregroundStyle(.white)
                         }).scaleEffect(selectedMode == mood.Image ? 1.3: 0.8).onTapGesture {
-                            selectedMode = mood.Image
-                            FColor = mood.color
-                            feeling = mood.feelings
+                            withAnimation {
+                                selectedMode = mood.Image
+                                FColor = mood.color
+                                feeling = mood.feelings
+                            }
+                           
                         }
                        
                     }
-                }).padding(.horizontal,15)
-               
+                })
             }
          
         }
