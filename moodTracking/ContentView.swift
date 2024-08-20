@@ -12,7 +12,7 @@ struct ContentView: View {
     @State var feeling = "? "
     @State var FColor: Color = .white
     @State var scrollToBottom = false
-    @State var selectedMode: ImageResource = .none
+    @State var selectedMode: ImageResource = .happy
     
     var body: some View {
       
