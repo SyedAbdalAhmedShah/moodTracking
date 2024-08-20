@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var feeling = "? "
-    @State var FColor: Color = .white
-    @State var scrollToBottom = false
-    @State var selectedMode: ImageResource = .happy
+  
     var moods:[MoodModel] = [
         MoodModel(feelings: "Happy", Image:.happy, color: .green),
         MoodModel(feelings: "Unhappy", Image:.sad, color: .purple),
@@ -21,38 +18,50 @@ struct ContentView: View {
     ]
     
     
-
+    @State var feeling = "? "
+    @State var FColor: Color = .white
+    @State var scrollToBottom = false
+    @State var selectedMode: ImageResource = .happy
     var body: some View {
-      
+
         ZStack (alignment: .bottomTrailing
                 ){
             Color.black.ignoresSafeArea()
             
             Circle().foregroundStyle(FColor).frame(width: 300,height: 300).blur(radius: 200).offset(x: 130,y: 130)
-            ScrollView {
-                topTitle
-                IconView(FColor: $FColor, selectedMode: $selectedMode)
-           
-                HStack(spacing: 15, content: {
-                    ForEach(moods, id: \.feelings) {mood in
-                        VStack(content: {
-                            Image(mood.Image).resizable().scaledToFill().frame(
-                          width: 80,  height:80
-                            )
-                            Text(mood.feelings).foregroundStyle(.white)
-                        }).scaleEffect(selectedMode == mood.Image ? 1.3: 0.8).onTapGesture {
-                            withAnimation {
-                                selectedMode = mood.Image
-                                FColor = mood.color
-                                feeling = mood.feelings
+            VStack(spacing: 64 , content: {
+                ScrollView {
+                    topTitle
+                    IconView(FColor: $FColor, selectedMode: $selectedMode)
+                    
+                    HStack(spacing: 15, content: {
+                        ForEach(moods, id: \.feelings) {mood in
+                            VStack(content: {
+                                Image(mood.Image).resizable().scaledToFill().frame(
+                                    width: 80,  height:80
+                                )
+                                Text(mood.feelings).foregroundStyle(.white)
+                            }).scaleEffect(selectedMode == mood.Image ? 1.3: 0.8).onTapGesture {
+                                withAnimation {
+                                    selectedMode = mood.Image
+                                    FColor = mood.color
+                                    feeling = mood.feelings
+                                }
+                                
                             }
-                           
+                            
                         }
-                       
-                    }
-                })
-            }
+                    })
+                    NoteView().padding(.top,30)
+                    
+                }
+            }).padding()
          
+         
+        }.onAppear {
+            selectedMode = moods.first?.Image ?? .happy
+            FColor = moods.first?.color ?? .teal
+            feeling = moods.first?.feelings ?? "Happy"
         }
     }
     
