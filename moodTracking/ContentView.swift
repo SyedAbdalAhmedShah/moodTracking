@@ -59,7 +59,13 @@ struct ContentView: View {
         ZStack(content: {
             Circle().frame(width: 220, height: 220).foregroundStyle(FColor).opacity(scale ? 0 : 1).scaleEffect(scale ? 1 : 0.4)
             Circle().frame(width: 300, height: 300).foregroundStyle(FColor).opacity(scale ? 0 : 1).scaleEffect(scale ? 1 : 0.2)
-            Image(selectedMode).resizable().scaledToFit().frame(width: 150, height: 150).scaleEffect(faceScale)
+            Image(selectedMode).resizable().scaledToFit().frame(width: 150, height: 150).scaleEffect(faceScale).onChange(of: selectedMode) { _, _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        faceScale = 1
+                    }
+                } )
+            }
         }).onAppear() {
             withAnimation(.linear(duration: 3).repeatForever(autoreverses: false)) {
                 scale.toggle()
