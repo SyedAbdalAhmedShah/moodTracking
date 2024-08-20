@@ -13,7 +13,12 @@ struct ContentView: View {
     @State var FColor: Color = .white
     @State var scrollToBottom = false
     @State var selectedMode: ImageResource = .happy
-    
+    var moods:[MoodModel] = [
+        MoodModel(feelings: "Happy", Image:.happy, color: .green),
+        MoodModel(feelings: "Unhappy", Image:.sad, color: .purple),
+        MoodModel(feelings: "Confuse", Image:.confuse, color: .blue),
+        MoodModel(feelings: "Angry", Image:.angry, color: .red),
+    ]
     var body: some View {
       
         ZStack (alignment: .bottomTrailing
@@ -24,6 +29,21 @@ struct ContentView: View {
             ScrollView {
                 topTitle
                 IconView(FColor: $FColor, selectedMode: $selectedMode)
+                HStack(spacing: 20, content: {
+                    ForEach(moods, id: \.feelings) {mood in
+                        VStack(content: {
+                            Image(mood.Image).resizable().scaledToFill().frame(
+                          width: 80,  height:80
+                            )
+                            Text(mood.feelings).foregroundStyle(.white)
+                        }).scaleEffect(selectedMode == mood.Image ? 1.3: 0.8).onTapGesture {
+                            selectedMode = mood.Image
+                            FColor = mood.color
+                            feeling = mood.feelings
+                        }
+                       
+                    }
+                }).padding(.horizontal,15)
                
             }
          

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Vehicle {
+struct MoodModel {
     
     var feelings: String
     var Image: ImageResource
