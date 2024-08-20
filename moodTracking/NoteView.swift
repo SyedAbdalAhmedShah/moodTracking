@@ -19,7 +19,11 @@ struct NoteView: View {
                 TextEditor(text: $text).padding(10).scrollContentBackground(.hidden).frame(height: 100).background(.gray.opacity(0.3),in: .rect(cornerRadius: 8))
             }
         }).overlay(alignment: .topTrailing) {
-            Button(action: {}
+            Button(action: {
+                withAnimation {
+                    open.toggle()
+                }
+            }
                    , label: {
                 Image(systemName: "xmark.circle.fill").padding().opacity(open ? 1 : 0).animation(.none, value: open)
             }).tint(.white)
